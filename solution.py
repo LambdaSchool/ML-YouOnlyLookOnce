@@ -22,3 +22,4 @@ def find_banana(img):
 	Change the contents of this function so it behaves correctly
 	"""
 	return "None"
+
