@@ -1,7 +1,5 @@
 import numpy as np
 
-
-
 from keras.applications.resnet50 import ResNet50
 print('TEST test TEST')
 '''
