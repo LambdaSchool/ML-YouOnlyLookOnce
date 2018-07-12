@@ -6,9 +6,16 @@ from keras.applications.resnet50 import preprocess_input, decode_predictions
 
 
 def contains_banana(img):
-	"""
-	Change the contents of this function so it behaves correctly
-	"""
+	image = np.reshape(image, (224, 1, 224, 1))
+	keras.applications.resnet50.ResNet50(
+		include_top=True,
+		weights='imagenet',
+		input_tensor=None,
+		input_shape=None,
+		pooling=None,
+		classes=1000
+		)
+
 	return -3.14159
 
 def crop_image(img, quadrant):
