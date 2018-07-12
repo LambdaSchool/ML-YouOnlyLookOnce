@@ -48,6 +48,7 @@ image in `sample_data/positive_examples` contains a banana and each image in
 
 For resources discussing "You Only Look Once" see:
 
+- [Original YOLO paper](https://pjreddie.com/media/files/papers/yolo.pdf)
 - [YOLO for Object Detection explained](https://medium.com/diaryofawannapreneur/yolo-you-only-look-once-for-object-detection-explained-6f80ea7aaa1e)
 - [How computers learn to recognize objects instantly (Joshua Redmon, TED)](https://youtu.be/Cgxsv1riJhI)
 
