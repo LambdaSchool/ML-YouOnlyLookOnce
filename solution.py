@@ -10,7 +10,9 @@ def contains_banana(img):
         print("analyzing: ", img)
         original = image.load_img(img, target_size=(224, 224))
     else:
-        original = img.resize(size=(224, 224)) # todo - find the correct way to feed a different size image
+        # todo - find the correct way to feed a different size image
+        # ResNet50 expects images as 3D tensors. where the default value of image's width is default_size=224 and the minimum width is min_size=197
+        original = img.resize(size=(224, 224))
 
     numpy_image = image.img_to_array(original)
     input_image = preprocess_input(np.expand_dims(numpy_image, axis=0))
@@ -43,7 +45,7 @@ def find_banana(img):
     for each in quadrants:
         print("analyzing: ", img, each)
         probs.append(contains_banana(crop_image(img, each)))
-    return 'None' if max(probs)==0.0 else quadrants[np.argmax(np.array(probs))]
+    return 'None' if max(probs) == 0.0 else quadrants[np.argmax(np.array(probs))]
 
 # print(contains_banana('./sample_data/positive_examples/example0.jpeg'))
 # print(contains_banana('./sample_data/positive_examples/example1.jpeg'))
@@ -57,4 +59,4 @@ def find_banana(img):
 # crop_image('./sample_data/positive_examples/example0.jpeg', 'BL')
 # crop_image('./sample_data/positive_examples/example0.jpeg', 'BR')
 
-print(find_banana('./sample_data/positive_examples/example0.jpeg'))
+# print(find_banana('./sample_data/positive_examples/example0.jpeg'))
