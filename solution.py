@@ -22,3 +22,7 @@ def find_banana(img):
 	Change the contents of this function so it behaves correctly
 	"""
 	return "None"
+
+
+
+ResNet50(include_top=True, weights='imagenet', input_tensor=None, input_shape=None, pooling=None, classes=1000)
