@@ -7,17 +7,15 @@ from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predi
 
 
 def contains_banana(img):
-    datagen = ImageDataGenerator()
+    img = load_img('C:/Users/solar/Desktop/' + img, target_size=(224, 224))
+    img = img_to_array(img)
+    img = np.expand_dims(img, axis=0)
 
-    img = load_img('C:/users/solar/Desktop/' + img)
-    img = ktf.image.resize_images(img, (224, 224))
-    img_array = img_to_array(img)
-    print(img_array.shape)
-    fig, ax = plt.subplots()
-    ax.imshow(img)
-    ax.axis('off')
-    plt.show()
-    return img
+    model = ResNet50(weights='imagenet')
+    features = model.predict(img)
+    results = decode_predictions(features, top=3)
+    for r in results:
+        return r[2] if r[1] == 'banana' else 0
 
 
 def crop_image(img, quadrant):
@@ -28,4 +26,4 @@ def crop_image(img, quadrant):
 def find_banana(img):
     return "None"
 
-contains_banana('example0.jpeg')
+print('Banana confidence = {}'.format(contains_banana('example0.jpeg')))
