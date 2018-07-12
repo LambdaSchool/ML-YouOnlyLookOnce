@@ -7,7 +7,7 @@ from keras.applications.resnet50 import preprocess_input, decode_predictions
 
 def contains_banana(img):
 	"""
-	Change the contents of this function so it behaves correctly
+	Change the contents of this function 
 	"""
 	return -3.14159
 
