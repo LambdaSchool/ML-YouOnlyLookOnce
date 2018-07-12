@@ -5,6 +5,7 @@ from keras.backend import tf as ktf
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
 
+!wget -nc https://raw.githubusercontect.com/LambdaSchool/ML-YouOnlyLookOnce
 
 def contains_banana(img):
     img = load_img('C:/Users/solar/Desktop/' + img, target_size=(224, 224))
