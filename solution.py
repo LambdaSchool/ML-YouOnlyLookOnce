@@ -1,3 +1,5 @@
+# Solution to come 
+
 import numpy as np
 
 from keras.applications.resnet50 import ResNet50
