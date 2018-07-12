@@ -4,38 +4,38 @@ from keras.applications.resnet50 import ResNet50
 from keras.preprocessing import image
 from keras.applications.resnet50 import preprocess_input, decode_predictions
 
-
 def contains_banana(img):
     if isinstance(img, str):
         print("analyzing: ", img)
         original = image.load_img(img, target_size=(224, 224))
     else:
-        # todo - find the correct way to feed a different size image
-        # ResNet50 expects images as 3D tensors. where the default value of image's width is default_size=224 and the minimum width is min_size=197
+        # ResNet50 expects images as 3D tensors.
+        # where the default value of image's width is default_size=224 and the minimum width is min_size=197
         original = img.resize(size=(224, 224))
 
+    print(original.size)
     numpy_image = image.img_to_array(original)
     input_image = preprocess_input(np.expand_dims(numpy_image, axis=0))
     resnet = ResNet50(weights='imagenet')
     preds = resnet.predict(input_image)
-    labels = decode_predictions(preds, top=3)
-    for each in labels[0]:
+    labels = decode_predictions(preds, top=3)[0]
+    for each in labels:
         if each[1] == 'banana':
             return each[2]
     return 0.0
 
-# coordinate system: left, upper, right, and lower
+# coordinate system: (left, upper, right, and lower)
 def crop_image(img, quadrant):
     original = image.load_img(img, target_size=(224, 224))
     w, h = original.size
     if quadrant == 'TL':
-        cropped_img = original.crop((0, 0, w*2/3, h*2/3))
+        cropped_img = original.crop((0, 0, w*2//3, h*2//3))
     elif quadrant == 'TR':
-        cropped_img = original.crop((w*1/3, 0, w*2/3, h*2/3))
+        cropped_img = original.crop((w*1//3, 0, w*2//3, h*2//3))
     elif quadrant == 'BL':
-        cropped_img = original.crop((0, w*1/3, w*2/3, h*2/3))
+        cropped_img = original.crop((0, w*1//3, w*2//3, h*2//3))
     elif quadrant == 'BR':
-        cropped_img = original.crop((w*1/3, w*1/3, w*2/3, h*2/3))
+        cropped_img = original.crop((w*1//3, w*1//3, w*2//3, h*2//3))
 
     return cropped_img
 
@@ -59,4 +59,4 @@ def find_banana(img):
 # crop_image('./sample_data/positive_examples/example0.jpeg', 'BL')
 # crop_image('./sample_data/positive_examples/example0.jpeg', 'BR')
 
-# print(find_banana('./sample_data/positive_examples/example0.jpeg'))
+# print(find_banana('./sample_data/positive_examples/example2.jpeg'))
