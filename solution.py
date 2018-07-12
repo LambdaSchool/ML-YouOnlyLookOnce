@@ -1,3 +1,5 @@
+# submitting unchanged for attendance purposes
+
 import numpy as np
 
 from keras.applications.resnet50 import ResNet50
