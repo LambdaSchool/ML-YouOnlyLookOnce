@@ -3,7 +3,6 @@ import numpy as np
 from keras.applications.resnet50 import ResNet50
 from keras.preprocessing import image
 from keras.applications.resnet50 import preprocess_input, decode_predictions
-from PIL import Image
 
 
 def contains_banana(img):
@@ -58,4 +57,4 @@ def find_banana(img):
 # crop_image('./sample_data/positive_examples/example0.jpeg', 'BL')
 # crop_image('./sample_data/positive_examples/example0.jpeg', 'BR')
 
-# print(find_banana('./sample_data/positive_examples/example0.jpeg'))
+print(find_banana('./sample_data/positive_examples/example0.jpeg'))
