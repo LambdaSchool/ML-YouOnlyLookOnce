@@ -18,7 +18,7 @@ def contains_banana(img):
     input_image = preprocess_input(np.expand_dims(numpy_image, axis=0))
     resnet = ResNet50(weights='imagenet')
     preds = resnet.predict(input_image)
-    labels = decode_predictions(preds, top=5)
+    labels = decode_predictions(preds, top=3)
     for each in labels[0]:
         if each[1] == 'banana':
             return each[2]
