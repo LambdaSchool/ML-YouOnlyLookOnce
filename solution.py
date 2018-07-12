@@ -7,8 +7,12 @@ from PIL import Image
 
 
 def contains_banana(img):
-    print("analyzing: ", img)
-    original = image.load_img(img, target_size=(224, 224))
+    if isinstance(img, str):
+        print("analyzing: ", img)
+        original = image.load_img(img, target_size=(224, 224))
+    else:
+        original = img.resize(size=(224, 224)) # todo - find the correct way to feed a different size image
+
     numpy_image = image.img_to_array(original)
     input_image = preprocess_input(np.expand_dims(numpy_image, axis=0))
     resnet = ResNet50(weights='imagenet')
@@ -32,14 +36,15 @@ def crop_image(img, quadrant):
     elif quadrant == 'BR':
         cropped_img = original.crop((w*1/3, w*1/3, w*2/3, h*2/3))
 
-    print(cropped_img.getbbox())
-    return img
+    return cropped_img
 
 def find_banana(img):
-	"""
-	Change the contents of this function so it behaves correctly
-	"""
-	return "None"
+    quadrants = ['TL', 'TR', 'BL', 'BR']
+    probs = []
+    for each in quadrants:
+        print("analyzing: ", img, each)
+        probs.append(contains_banana(crop_image(img, each)))
+    return 'None' if max(probs)==0.0 else quadrants[np.argmax(np.array(probs))]
 
 # print(contains_banana('./sample_data/positive_examples/example0.jpeg'))
 # print(contains_banana('./sample_data/positive_examples/example1.jpeg'))
@@ -48,7 +53,9 @@ def find_banana(img):
 # print(contains_banana('./sample_data/negative_examples/example11.jpeg'))
 # print(contains_banana('./sample_data/negative_examples/example12.jpeg'))
 
-crop_image('./sample_data/positive_examples/example0.jpeg', 'TL')
-crop_image('./sample_data/positive_examples/example0.jpeg', 'TR')
-crop_image('./sample_data/positive_examples/example0.jpeg', 'BL')
-crop_image('./sample_data/positive_examples/example0.jpeg', 'BR')
+# crop_image('./sample_data/positive_examples/example0.jpeg', 'TL')
+# crop_image('./sample_data/positive_examples/example0.jpeg', 'TR')
+# crop_image('./sample_data/positive_examples/example0.jpeg', 'BL')
+# crop_image('./sample_data/positive_examples/example0.jpeg', 'BR')
+
+# print(find_banana('./sample_data/positive_examples/example0.jpeg'))
