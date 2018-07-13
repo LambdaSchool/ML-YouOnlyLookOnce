@@ -73,7 +73,8 @@ def find_banana(img):
 
 # --------------------------------------------------------------------------------
 for i in range(3):
-  x = contains_banana('./example{}.jpeg'.format(i))
+  img = load_img('./example{}.jpeg'.format(i))
+  x = x = contains_banana(img)
   print(i,': Banana confidence = {}'.format(x))
 
 # --------------------------------------------------------------------------------    
